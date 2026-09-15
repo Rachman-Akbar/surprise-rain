@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise Rains - Playing</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="game-body">
+
+    <!-- Overlay Sekarat (Damage) -->
+    <div id="damage-overlay"></div>
+
+    <div id="game-container">
+        <!-- HUD Header Minimalis (Tanpa Background & Border) -->
+        <div id="hud">
+            <!-- Kiri: Hanya Icon Home -->
+            <button id="btn-home" onclick="window.location.href='index.html'" title="Home">🏠</button>
+            
+            <!-- Kanan: Format Teks "Level X | Score/Target" -->
+            <div id="hud-right">
+                Level <span id="level-txt">1</span> | <span id="score-txt">0</span>/<span id="target-score-txt">15</span>
+            </div>
+        </div>
+
+        <!-- Area Game Fullscreen -->
+        <div id="game-area">
+            <!-- Dual Background Layer (Cross-Fade Mulus) -->
+            <div id="game-bg-1" class="bg-layer active"></div>
+            <div id="game-bg-2" class="bg-layer"></div>
+
+            <!-- Keranjang & Label Minimalis -->
+            <div id="player">
+                <div id="player-avatar"></div>
+                <div id="player-label">Target</div>
+            </div>
+        </div>
+
+        <!-- Popup Modal Level Selesai -->
+        <div id="level-modal" class="modal hidden">
+            <h1 id="level-title">Level Selesai!</h1>
+            <p id="level-desc">Kamu berhasil mencapai target kategori!</p>
+            <div class="modal-buttons">
+                <button class="btn" id="next-level-btn">Level Berikutnya</button>
+                <button class="btn btn-secondary" onclick="window.location.href='index.html'">Pilih Level</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

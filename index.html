@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise Rains - Select Level</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="home-body">
+
+    <div class="home-container">
+        <h1 class="game-title">SURPRISE RAINS</h1>
+        <p class="game-subtitle">Pilih Level untuk Memulai Permainan</p>
+
+        <!-- Grid Level 1 - 8 -->
+        <div class="level-grid" id="level-grid"></div>
+    </div>
+
+    <script>
+        const unlockedLevel = parseInt(localStorage.getItem('unlockedLevel')) || 1;
+        const levelGrid = document.getElementById('level-grid');
+
+        for (let i = 1; i <= 8; i++) {
+            const btn = document.createElement('button');
+            btn.className = `level-btn ${i <= unlockedLevel ? 'unlocked' : 'locked'}`;
+            
+            if (i <= unlockedLevel) {
+                btn.innerHTML = `<span class="lvl-num">${i}</span><span class="lvl-status">Mainkan</span>`;
+                btn.onclick = () => {
+                    window.location.href = `game.html?level=${i}`;
+                };
+            } else {
+                btn.innerHTML = `<span class="lvl-num">${i}</span><span class="lvl-status">🔒 Terkunci</span>`;
+                btn.disabled = true;
+            }
+            
+            levelGrid.appendChild(btn);
+        }
+    </script>
+</body>
+</html>

@@ -2,7 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     user-select: none;
 }
 
@@ -100,7 +100,6 @@ html, body {
     overflow: hidden;
 }
 
-/* BACKGROUND GAME DUAL-LAYER (CROSS-FADE SMOOTH TRANSPARANSI 60%) */
 .bg-layer {
     position: absolute;
     top: 0;
@@ -118,10 +117,10 @@ html, body {
 }
 
 .bg-layer.active {
-    opacity: 0.6; /* Transparansi 60% */
+    opacity: 0.6;
 }
 
-/* Overlay Damage Merah */
+/* OVERLAY KETIKA SALAH TANGKAP */
 #damage-overlay {
     position: fixed;
     top: 0;
@@ -140,50 +139,127 @@ html, body {
     opacity: 1;
 }
 
-/* HUD HEADER MINIMALIS (TANPA BACKGROUND & TANPA BORDER) */
+/* ================= HUD HEADER MINIMALIS ================= */
 #hud {
     width: 100%;
-    height: 70px;
-    background: transparent;
-    backdrop-filter: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 35px;
+    padding: 18px 24px;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 10;
+    pointer-events: none;
 }
 
-/* Tombol Icon Home Saja */
-#btn-home {
+#btn-home, #hud-right-container {
+    pointer-events: auto;
+}
+
+/* TOMBOL HOME DAN AUDIO MINIMALIS (TANPA GLASS & BORDER) */
+#btn-home, #btn-sound {
     background: transparent;
     border: none;
-    outline: none;
-    font-size: 32px;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    color: white;
+    box-shadow: none;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* UKURAN EMOJI HOME DIPERBESAR */
+#btn-home {
+    font-size: 38px;
+    width: auto;
+    height: auto;
     padding: 0;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.85);
-    transition: transform 0.2s ease;
+    line-height: 1;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
 }
 
-#btn-home:hover {
-    transform: scale(1.2);
+#btn-sound {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+}
+
+#btn-home:hover, #btn-sound:hover {
     background: transparent;
+    border: none;
+    transform: scale(1.15);
+    box-shadow: none;
 }
 
-/* Teks Kanan HUD: Level X | Y/Z (Teks Murni) */
-#hud-right {
-    font-size: 22px;
+#btn-home:active, #btn-sound:active {
+    transform: scale(0.95);
+}
+
+#btn-sound.muted {
+    opacity: 0.5;
+    color: #ef4444;
+}
+
+.hud-icon {
+    display: block;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+/* HUD CONTAINER KANAN */
+#hud-right-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.hud-pill {
+    background: transparent;
+    border: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+    font-variant-numeric: tabular-nums;
+}
+
+#level-txt,
+#score-txt,
+#total-score-txt {
+    color: #ffffff;
+}
+
+#score-display {
+    font-size: 18px;
     font-weight: 800;
     color: #ffffff;
+    font-variant-numeric: tabular-nums;
     letter-spacing: 0.5px;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.85);
 }
 
-/* Area Game */
+.hud-divider {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 16px;
+}
+
+#level-display {
+    font-size: 16px;
+    font-weight: 700;
+    color: #f1c40f;
+    letter-spacing: 0.5px;
+}
+
+/* AREA GAME */
 #game-area {
     width: 100vw;
     height: 100vh;
@@ -191,7 +267,6 @@ html, body {
     background: linear-gradient(to bottom, #1e3c72 0%, #2a5298 100%);
 }
 
-/* CONTAINER PLAYER KERANJANG */
 #player {
     position: absolute;
     bottom: 10px;
@@ -204,7 +279,6 @@ html, body {
     will-change: transform, left;
 }
 
-/* GAMBAR KERANJANG MINIMALIS (70x70 px) */
 #player-avatar {
     width: 70px;
     height: 70px;
@@ -214,7 +288,6 @@ html, body {
     transition: background-image 0.2s ease-in-out;
 }
 
-/* TULISAN KATEGORI MINIMALIS */
 #player-label {
     margin-top: 2px;
     color: #ffffff;
@@ -227,7 +300,6 @@ html, body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
-/* Items Jatuh */
 .item {
     position: absolute;
     font-size: 40px;
@@ -239,7 +311,25 @@ html, body {
     will-change: transform, top;
 }
 
-/* Modal UI */
+/* ANIMASI TEKS COMBO MELAYANG */
+.combo-popup {
+    position: absolute;
+    font-size: 24px;
+    font-weight: 900;
+    color: #ffeb3b;
+    text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+    pointer-events: none;
+    animation: floatUpFade 0.8s ease-out forwards;
+    z-index: 20;
+}
+
+@keyframes floatUpFade {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    50% { transform: translateY(-30px) scale(1.3); opacity: 1; }
+    100% { transform: translateY(-60px) scale(1); opacity: 0; }
+}
+
+/* MODAL UI */
 .modal {
     position: absolute;
     top: 0;

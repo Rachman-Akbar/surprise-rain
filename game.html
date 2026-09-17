@@ -3,46 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surprise Rains - Playing</title>
+    <title>Surprise Rains Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="game-body">
 
-    <!-- Overlay Sekarat (Damage) -->
+    <!-- Overlay Efek Damage -->
     <div id="damage-overlay"></div>
 
     <div id="game-container">
-        <!-- HUD Header Minimalis (Tanpa Background & Border) -->
+<!-- HUD Header Minimalis -->
         <div id="hud">
-            <!-- Kiri: Hanya Icon Home -->
-            <button id="btn-home" onclick="window.location.href='index.html'" title="Home">🏠</button>
+            <!-- Tombol Home Kiri -->
+            <button id="btn-home" onclick="playSFX('click'); window.location.href='index.html'" title="Kembali ke Menu Utama" aria-label="Home">
+                🏠
+            </button>
             
-            <!-- Kanan: Format Teks "Level X | Score/Target" -->
-            <div id="hud-right">
-                Level <span id="level-txt">1</span> | <span id="score-txt">0</span>/<span id="target-score-txt">15</span>
+            <!-- Container Kanan -->
+            <div id="hud-right-container">
+                <!-- Info Level & Skor (Level 1 : 0 / 20) -->
+<div class="hud-pill">
+    Level <span id="level-txt">1</span> : <span id="score-txt">0</span> / <span id="total-score-txt">0</span>
+</div>
+
+                <!-- Tombol Audio Paling Kanan -->
+                <button id="btn-sound" onclick="toggleSound()" title="Mute / Unmute Suara" aria-label="Toggle Sound">
+                    <svg class="hud-icon" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                </button>
             </div>
         </div>
 
-        <!-- Area Game Fullscreen -->
+        <!-- Area Utama Game -->
         <div id="game-area">
-            <!-- Dual Background Layer (Cross-Fade Mulus) -->
             <div id="game-bg-1" class="bg-layer active"></div>
             <div id="game-bg-2" class="bg-layer"></div>
 
-            <!-- Keranjang & Label Minimalis -->
             <div id="player">
                 <div id="player-avatar"></div>
                 <div id="player-label">Target</div>
             </div>
         </div>
 
-        <!-- Popup Modal Level Selesai -->
+        <!-- Popup Modal Level Selesai / Gagal -->
         <div id="level-modal" class="modal hidden">
             <h1 id="level-title">Level Selesai!</h1>
-            <p id="level-desc">Kamu berhasil mencapai target kategori!</p>
+            <p id="level-desc">Kamu berhasil mencapai target skor!</p>
             <div class="modal-buttons">
                 <button class="btn" id="next-level-btn">Level Berikutnya</button>
-                <button class="btn btn-secondary" onclick="window.location.href='index.html'">Pilih Level</button>
+                <button class="btn btn-secondary" onclick="playSFX('click'); window.location.href='index.html'">Pilih Level</button>
             </div>
         </div>
     </div>
